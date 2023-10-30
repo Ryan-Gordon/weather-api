@@ -1,8 +1,4 @@
 import pytest
-from app import app as connex_app
-from weather_api.model import db, SensorData
-import csv
-import datetime
 
 
 @pytest.mark.parametrize(
@@ -81,3 +77,4 @@ def test_query_metric(client_fixture, setup_db_fixture, query_params, expected_r
     response = client_fixture.get(f"/api/query?{query_params}")
     data = response.json
     assert data == expected_response
+

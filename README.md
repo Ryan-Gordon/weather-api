@@ -19,3 +19,29 @@ in the last week.
 I opted to use the library `connexion` so I can take a design or 'spec-first' approach to building the API. This allows me to define the API in a yaml file and focus on the design of the API before writing any code. Each route in the API is linked to an implementation using the operationId field meaning I can write the implementation in a separate file and ensure each route has a corresponding implementation.
 
 For persistence, to save time I opted to use SQLAlchemy and SQLite. The connexion library has an optional `flask` extension which will use Flask. Both Flask and SQLAlchemy play nicely. 
+
+### Setup 
+
+#### Optional Configs 
+You can specify the port the service runs on or the location of the database file. If you don't specify these, the defaults will be used. 
+
+```
+export WEATHER_API_PORT=8080
+export SQLLITE_DB_LOCATION=/tmp/weather.db
+```
+
+#### Running the service 
+
+> Its advisable to setup a virtual environment before installing the dependencies. I use `pyenv` and `pyenv-virtualenv` to manage my python versions and virtual environments. 
+
+
+Install the dependencies
+```
+
+pip install -r requirements.txt
+```
+
+Run the service
+```
+python app.py
+```

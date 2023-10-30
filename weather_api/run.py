@@ -1,12 +1,15 @@
-from weather_api.model import db, SensorData
+"""
+The implementation of the API is done in this file.
+"""
 import datetime
-
-
-def post_greeting(name: str):
-    return f"Hello {name}", 200
+from weather_api.model import db, SensorData
 
 
 def add_metric(body):
+    """
+    This function is used to add data to the database.
+    The structure of the data is defined in the API docs and the body parameter is a dictionary representing the JSON body.
+    """
 
     # Validate the input data, ideally this is also done via the API docs marking fields as required
     if not all(key in body for key in ("sensor_id", "metric", "value", "unit_of_measurement", "timestamp")):
@@ -18,7 +21,7 @@ def add_metric(body):
     except ValueError:
         return {'message': 'Incorrect timestamp format, should be YYYY-MM-DDTHH:MM:SS.mmmZ'}, 400
 
-    #  Add the data to the database
+    # Add the data to the database
     new_data = SensorData(
         sensor_id=body['sensor_id'],
         metric=body['metric'],
@@ -33,6 +36,11 @@ def add_metric(body):
 
 
 def query_metric(sensor_ids: list, metrics: list, statistic='average', date_range='latest'):
+    """
+    This function is used to query the database for the given sensor_ids and metrics.
+    The statistic parameter is used to determine what statistic to return for the given metric.
+    The date_range parameter is used to determine what date range to query the database for.
+    """
     # Date range parsing, if latest then use the last 24 hours
     if date_range == 'latest':
         start_date = datetime.datetime.now() - datetime.timedelta(days=1)
