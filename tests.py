@@ -13,7 +13,7 @@ def client():
     [
         # Happy path: Valid data for temperature
         ({
-            "sensor_id": "1",
+            "sensor_id": "sensor-temperature-1",
             "metric": "temperature",
             "value": 23.5,
             "unit_of_measurement": "degrees:celsius",
@@ -22,7 +22,7 @@ def client():
 
         # sad path: Missing a key (e.g. "value")
         ({
-            "sensor_id": "1",
+            "sensor_id": "sensor-temperature-1",
             "metric": "temperature",
             "unit_of_measurement": "degrees:celsius",
             "timestamp": "2023-10-30T08:45:59.056Z"
@@ -30,11 +30,10 @@ def client():
 
         # sad path: Incorrect timestamp format
         ({
-            "sensor_id": "1",
+            "sensor_id": "sensor-temperature-1",
             "metric": "temperature",
             "value": 23.5,
             "unit_of_measurement": "degrees:celsius",
-
             "timestamp": "2023/10/30 08:45:59"
         }, 400),
         # Happy path; humidity

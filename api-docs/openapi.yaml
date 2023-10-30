@@ -13,6 +13,47 @@ servers:
     variables: {}
 
 paths:
+  
+  /query:
+    get:
+      operationId: run.query_metric
+      parameters:
+        - name: sensor_ids
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: metrics
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: statistic
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [min, max, sum, average]
+            default: average
+        - name: date_range
+          in: query
+          required: false
+          schema:
+            type: string
+            description: Date range format should be 'YYYY-MM-DD:YYYY-MM-DD'. If not specified, defaults to 'latest' (last 24 hours).
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: number
   /metric:
     post:
       operationId: run.add_metric
