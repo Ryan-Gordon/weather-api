@@ -45,3 +45,29 @@ Run the service
 ```
 python app.py
 ```
+
+### Testing and CI 
+
+There are 3 types of tests located in the `tests` directory.
++ The first type are parameterised tests which test the API routes against expected responses or results. 
++ The second type are behaviour driven tests. I took the example query from the spec and used it to define a 'feature' to test against
++ The third type is load testing with locust. This is a very simple test file that will shoot twice as many posts to `metric` as it does queries to `query`
+
+To run the tests just run 
+```
+pytest tests
+```
+
+The load test file will not be included in this. 
+To use, install locust, run the API locally and then run 
+```
+locust -f tests/test_locust.py --host http://127.0.0.1:2020
+```
+
+If you don't want to run it in the UI, use the following to run it for 20 seconds with 10 users and a hatch rate of 1 user per second.
+
+```
+locust -f tests/test_locust.py --host http://127.0.0.1:2020 --headless -u 10 -r 1 --run-time 20s
+
+```
+
