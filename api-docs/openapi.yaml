@@ -52,8 +52,22 @@ paths:
             application/json:
               schema:
                 type: object
-                additionalProperties:
-                  type: number
+                properties:
+                  sensors:
+                    type: object
+                    additionalProperties:
+                      oneOf:
+                        - type: object
+                          properties:
+                            statistic:
+                              type: string
+                            value:
+                              type: number
+                        - type: object
+                          properties:
+                            value:
+                              type: number
+
   /metric:
     post:
       operationId: run.add_metric

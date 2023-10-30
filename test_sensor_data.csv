@@ -1,0 +1,9 @@
+sensor_id,metric,value,unit_of_measurement,timestamp
+temperature-1,temperature,23.5,degrees:celsius,2023-10-30T08:45:59.000Z
+temperature-1,temperature,24.0,degrees:celsius,2023-10-31T08:45:59.000Z
+temperature-2,temperature,22.0,degrees:celsius,2023-10-30T09:30:00.000Z
+temperature-2,temperature,22.5,degrees:celsius,2023-10-31T09:30:00.000Z
+humidity-1,humidity,55.5,percent,2023-10-30T10:00:00.000Z
+humidity-1,humidity,56.0,percent,2023-10-31T10:00:00.000Z
+humidity-2,humidity,57.0,percent,2023-10-30T11:00:00.000Z
+humidity-2,humidity,58.0,percent,2023-10-31T11:00:00.000Z
