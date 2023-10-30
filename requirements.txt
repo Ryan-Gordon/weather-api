@@ -1,1 +1,2 @@
 connexion[flask, swagger-ui]
+Flask-SQLAlchemy

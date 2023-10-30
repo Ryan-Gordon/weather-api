@@ -13,6 +13,37 @@ servers:
     variables: {}
 
 paths:
+  /metric:
+    post:
+      operationId: run.add_metric
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sensor_id:
+                  type: string
+                metric:
+                  type: string
+                value:
+                  type: number
+                unit_of_measurement:
+                  type: string
+                timestamp:
+                  type: string
+                  format: date-time
+      responses:
+        201:
+          description: Data added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /greeting/{name}:
     post:
       operationId: run.post_greeting
