@@ -1,0 +1,31 @@
+openapi: "3.0.0"
+
+info:
+  title: "My API documentation"
+  version: "1.0"
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: /api
+    description: Base Path for all API calls
+    variables: {}
+
+paths:
+  /greeting/{name}:
+    post:
+      operationId: run.post_greeting
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
