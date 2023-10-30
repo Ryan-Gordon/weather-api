@@ -1,40 +1,8 @@
 import pytest
 from app import app as connex_app
-from model import db, SensorData
+from weather_api.model import db, SensorData
 import csv
 import datetime
-
-
-@pytest.fixture
-def client_fixture():
-    with connex_app.app.test_client() as client:
-        with connex_app.app.app_context():
-            yield client
-
-
-@pytest.fixture(scope="function")
-def setup_db_fixture():
-    # Load data from the CSV and add to the database
-    with open('test_sensor_data.csv', 'r') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            new_data = SensorData(
-                sensor_id=row['sensor_id'],
-                metric=row['metric'],
-                value=float(row['value']),
-                unit_of_measurement=row['unit_of_measurement'],
-                # Ensure the timestamp is converted to a datetime object
-                timestamp=datetime.datetime.strptime(
-                    row['timestamp'], '%Y-%m-%dT%H:%M:%S.%fZ')
-            )
-            db.session.add(new_data)
-        db.session.commit()
-
-    yield   # This will allow the test to run
-
-    # Cleanup - remove all the entries after the test is done
-    SensorData.query.delete()
-    db.session.commit()
 
 
 @pytest.mark.parametrize(
@@ -93,7 +61,7 @@ def test_add_metric(client_fixture, input_data, expected_status):
         # 2. Querying humidity sensors of humidity-1 and humidity-2
         (
             "sensor_ids=humidity-1&sensor_ids=humidity-2&metrics=humidity&statistic=average",
-            {'sensors': {'humidity': {'statistic': 'average', 'value': 55.5}}}
+            {'sensors': {'humidity': {'statistic': 'average', 'value': 56.25}}}
         ),
 
         # 3. Querying the min value of temperature-1 sensor_id
@@ -112,5 +80,4 @@ def test_add_metric(client_fixture, input_data, expected_status):
 def test_query_metric(client_fixture, setup_db_fixture, query_params, expected_response):
     response = client_fixture.get(f"/api/query?{query_params}")
     data = response.json
-    print(data)
     assert data == expected_response

@@ -16,7 +16,7 @@ paths:
   
   /query:
     get:
-      operationId: run.query_metric
+      operationId: weather_api.run.query_metric
       parameters:
         - name: sensor_ids
           in: query
@@ -70,7 +70,7 @@ paths:
 
   /metric:
     post:
-      operationId: run.add_metric
+      operationId: weather_api.run.add_metric
       requestBody:
         required: true
         content:
@@ -101,7 +101,7 @@ paths:
                     type: string
   /greeting/{name}:
     post:
-      operationId: run.post_greeting
+      operationId: weather_api.run.post_greeting
       parameters:
         - name: name
           in: path

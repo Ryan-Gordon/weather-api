@@ -1,10 +1,10 @@
 from connexion import FlaskApp
 import connexion
 import os
-from model import db, SensorData
+from weather_api.model import db, SensorData
 
 # Provide the app and the directory of the docs
-app = connexion.FlaskApp(__name__, specification_dir='api-docs/')
+app = connexion.FlaskApp(__name__, specification_dir='./api-docs/')
 
 # TODO: might make more sense to move to a config file
 connex_app = app.app

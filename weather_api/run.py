@@ -1,4 +1,4 @@
-from model import db, SensorData
+from weather_api.model import db, SensorData
 import datetime
 
 
