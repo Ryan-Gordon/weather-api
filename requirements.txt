@@ -1,3 +1,4 @@
 connexion[flask, swagger-ui]
 Flask-SQLAlchemy
 pytest-bdd
+locust
