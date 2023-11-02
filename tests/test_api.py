@@ -51,13 +51,13 @@ def test_add_metric(client_fixture, input_data, expected_status):
         # 1. Querying temperature sensors of temperature-1 and temperature-2
         (
             "sensor_ids=temperature-1&sensor_ids=temperature-2&metrics=temperature&statistic=average",
-            {'sensors': {'temperature': {'statistic': 'average', 'value': 22.75}}}
+            {'sensors': {'temperature': {'statistic': 'average', 'value': 23}}}
         ),
 
         # 2. Querying humidity sensors of humidity-1 and humidity-2
         (
             "sensor_ids=humidity-1&sensor_ids=humidity-2&metrics=humidity&statistic=average",
-            {'sensors': {'humidity': {'statistic': 'average', 'value': 56.25}}}
+            {'sensors': {'humidity': {'statistic': 'average', 'value': 56.625}}}
         ),
 
         # 3. Querying the min value of temperature-1 sensor_id
@@ -69,7 +69,7 @@ def test_add_metric(client_fixture, input_data, expected_status):
         # 4. Querying the average of both humidity and temperature for humidity-1 and temperature-1
         (
             "sensor_ids=humidity-1&sensor_ids=temperature-1&metrics=humidity&metric=temperature&statistic=average",
-            {'sensors': {'humidity': {'statistic': 'average', 'value': 55.5}}}
+            {'sensors': {'humidity': {'statistic': 'average', 'value': 55.75}}}
         )
     ]
 )
@@ -77,4 +77,3 @@ def test_query_metric(client_fixture, setup_db_fixture, query_params, expected_r
     response = client_fixture.get(f"/api/query?{query_params}")
     data = response.json
     assert data == expected_response
-

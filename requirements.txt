@@ -1,4 +1,4 @@
-connexion[flask, swagger-ui]
+connexion[flask, swagger-ui, uvicorn]==2.14.2 # Pinned to avoid breaking changes from 3.0 released on 1st Nov 
 Flask-SQLAlchemy
 pytest-bdd
 locust
